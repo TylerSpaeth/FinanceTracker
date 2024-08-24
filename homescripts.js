@@ -63,6 +63,7 @@ function createNewTransaction() {
   var name = document.getElementById("name-input").value;
   var description = document.getElementById("description-input").value;
   var amount = document.getElementById("amount-input").value;
+  var date = document.getElementById("date-input").value;
   
   fetch("https://localhost:7137/transaction", {
     method: "POST",
@@ -74,7 +75,8 @@ function createNewTransaction() {
     body: JSON.stringify( {
       "transactionName": name,
       "transactionDescription": description,
-      "transactionAmount": amount
+      "transactionAmount": amount,
+      "transactionDate": date
     })
   })
   .then(response => {
@@ -121,8 +123,6 @@ function updateTransactionForm(button) {
   // Store this transactionid in session storage so that it can be updated
   sessionStorage.setItem("workingTransactionID", transactionID);
 
-  var transaction;
-
   fetch("https://localhost:7137/transaction/"+transactionID, {
     method: "GET",
     headers: {
@@ -136,14 +136,12 @@ function updateTransactionForm(button) {
     }
   })
   .then(jsonResponse => {
-    //transaction = JSON.parse(JSON.stringify(jsonResponse));
-    // window.alert(JSON.parse(JSON.stringify(jsonResponse)).transactionName)
-    // TODO prefill the text inputs with current values
     area.innerHTML += "<h2 for=\"update-transaction\" class=\"update-transaction-label\">Update Transaction</h2>"
     + "<form id=\"update-transaction\" onsubmit=\"return updateTransaction();\" class=\"transaction-form\">"
-      + "<label for=\"updated-name-input\">Transaction Name: <input type=\"text\" id=\"updated-name-input\" value=\""+JSON.parse(JSON.stringify(jsonResponse)).transactionName+"\"/></label>"
+      + "<label for=\"updated-name-input\">Transaction Name: <input type=\"text\" id=\"updated-name-input\" value=\""+JSON.parse(JSON.stringify(jsonResponse)).transactionName+"\" required /></label>"
       + "<label for=\"updated-description-input\">Transaction Description (optional): <input type=\"text\" id=\"updated-description-input\"value=\""+JSON.parse(JSON.stringify(jsonResponse)).transactionDescription+"\"/></label>"
-      + "<label for=\"updated-amount-input\">Transaction Amount: <input type=\"number\" step=\"0.01\" id=\"updated-amount-input\" value=\""+JSON.parse(JSON.stringify(jsonResponse)).transactionAmount+"\"/></label>"
+      + "<label for=\"updated-amount-input\">Transaction Amount: <input type=\"number\" step=\"0.01\" id=\"updated-amount-input\" value=\""+JSON.parse(JSON.stringify(jsonResponse)).transactionAmount+"\" required /></label>"
+      + "<label for=\"updated-date-input\">Transaction Date: <input type=\"datetime-local\" id=\"updated-date-input\" value=\""+JSON.parse(JSON.stringify(jsonResponse)).transactionDate.slice(0,16)+"\" required/></label>"
       + " <button type=\"submit\" class=\"form-button\">Submit</button>"
     + "</form>";
   })
@@ -159,6 +157,7 @@ function updateTransaction() {
   var name = document.getElementById("updated-name-input").value;
   var description = document.getElementById("updated-description-input").value;
   var amount = document.getElementById("updated-amount-input").value;
+  var date = document.getElementById("updated-date-input").value;
 
 
   
@@ -172,7 +171,8 @@ function updateTransaction() {
     body: JSON.stringify( {
       "transactionName": name,
       "transactionDescription": description,
-      "transactionAmount": amount
+      "transactionAmount": amount,
+      "transactionDate": date
     })
   })
   .then(response => {

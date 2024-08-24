@@ -4,10 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace FinanceTracker.Migrations
+namespace FinanceTrackerAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,7 +58,8 @@ namespace FinanceTracker.Migrations
                     TransactionID = table.Column<string>(type: "text", nullable: false),
                     TransactionName = table.Column<string>(type: "text", nullable: false),
                     TransactionDescription = table.Column<string>(type: "text", nullable: false),
-                    TransactionAmount = table.Column<int>(type: "integer", nullable: false),
+                    TransactionAmount = table.Column<double>(type: "double precision", nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>

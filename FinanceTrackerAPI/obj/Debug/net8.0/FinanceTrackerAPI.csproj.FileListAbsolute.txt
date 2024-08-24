@@ -224,3 +224,4 @@ C:\Users\Tyler Spaeth\Desktop\FinanceTracker\FinanceTrackerAPI\obj\Debug\net8.0\
 C:\Users\Tyler Spaeth\Desktop\FinanceTracker\FinanceTrackerAPI\obj\Debug\net8.0\FinanceT.D32D4E2C.Up2Date
 C:\Users\Tyler Spaeth\Desktop\FinanceTracker\FinanceTrackerAPI\obj\Debug\net8.0\FinanceTrackerAPI.genruntimeconfig.cache
 C:\Users\Tyler Spaeth\Desktop\FinanceTracker\FinanceTrackerAPI\obj\Debug\net8.0\ref\FinanceTrackerAPI.dll
+C:\Users\Tyler Spaeth\Desktop\FinanceTracker\FinanceTrackerAPI\obj\Debug\net8.0\FinanceTrackerAPI.sourcelink.json

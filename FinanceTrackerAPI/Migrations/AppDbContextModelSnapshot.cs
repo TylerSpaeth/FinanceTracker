@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace FinanceTracker.Migrations
+namespace FinanceTrackerAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -22,13 +22,16 @@ namespace FinanceTracker.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FinanceTracker.Data.Transaction", b =>
+            modelBuilder.Entity("FinanceTrackerAPI.Data.Transaction", b =>
                 {
                     b.Property<string>("TransactionID")
                         .HasColumnType("text");
 
-                    b.Property<int>("TransactionAmount")
-                        .HasColumnType("integer");
+                    b.Property<double>("TransactionAmount")
+                        .HasColumnType("double precision");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("TransactionDescription")
                         .IsRequired()

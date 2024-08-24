@@ -14,19 +14,20 @@
         <button type="button" id="signout-button" onclick="signout();">Sign Out</button>
       </label>  
     </header>
-    <div id="transactions-total">
-    </div>
+      <div id="transactions-total">
+      </div>
     <div id="transaction-page-content">
       <div id="transactions">  
       </div>
-      
+    
       <div id="right-box">
         <div class="transaction-form-area">
           <h2 for="new-transaction" class="new-transaction-label">Create New Transaction</h2>
           <form id="new-transaction" onsubmit="return createNewTransaction();" class="transaction-form">
-            <label for="name-input">Transaction Name: <input type="text" id="name-input"/></label>
+            <label for="name-input">Transaction Name: <input type="text" id="name-input" required/></label>
             <label for="description-input">Transaction Description (optional): <input type="text" id="description-input"/></label>
-            <label for="amount-input">Transaction Amount: <input type="number" step="0.01" id="amount-input"/></label>
+            <label for="amount-input">Transaction Amount: <input type="number" step="0.01" id="amount-input" required/></label>
+            <label for="date-input">Transaction Date: <input type="datetime-local" id="date-input" required/></label>
             <button type="submit" class="form-button">Submit</button>
           </form>
         </div>

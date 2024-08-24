@@ -14,7 +14,8 @@ namespace FinanceTrackerAPI.Endpoints
             app.MapGet("", (AppDbContext context, ClaimsPrincipal principal) =>
             {
                 var userid = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return context.Transactions.Where(t => t.UserId == userid);
+                // Returns the transactions with the oldest first and the newest last
+                return context.Transactions.OrderBy(t => t.TransactionDate).Where(t => t.UserId == userid);
             }).RequireAuthorization();
 
             // Get the transaction matching the transactionID only if the userid on the transaction matches the requestees
@@ -76,6 +77,7 @@ namespace FinanceTrackerAPI.Endpoints
                 transaction.TransactionName = updatedTransaction.TransactionName;
                 transaction.TransactionDescription = updatedTransaction.TransactionDescription;
                 transaction.TransactionAmount = updatedTransaction.TransactionAmount;
+                transaction.TransactionDate = updatedTransaction.TransactionDate;
 
                 context.SaveChanges();
                 return Results.NoContent();
