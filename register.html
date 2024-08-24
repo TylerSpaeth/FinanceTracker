@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Finance Tracker</h1>
+    </header>
+
+    <div class="login-register-area">
+      <h2 for="register" class="login-register-label">Register</h2>
+      <form id="register" onsubmit="return register();" class="login-register-form">
+        <label for="email-input">Enter your email: <input type="email" id="email-input" /></label>
+        <!-- Pattern for password field requires 6 characters with: one uppercase, one lowercase, 
+         one number, one special character -->
+        <label for="password-input">Enter your password: <input type="password" id="password-input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"/></label>
+        <button type="submit" class="login-register-button">Register</button>
+      </form>
+    </div>
+    
+    <footer>
+      <!--Complete this-->
+    </footer>
+  </body>
+</html>

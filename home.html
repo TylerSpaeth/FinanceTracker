@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" id="homepage">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="homescripts.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Finance Tracker</h1>
+      <label for="signout-button">
+        <button type="button" id="signout-button" onclick="signout();">Sign Out</button>
+      </label>  
+    </header>
+    <div id="transactions-total">
+    </div>
+    <div id="transaction-page-content">
+      <div id="transactions">  
+      </div>
+      
+      <div id="right-box">
+        <div class="transaction-form-area">
+          <h2 for="new-transaction" class="new-transaction-label">Create New Transaction</h2>
+          <form id="new-transaction" onsubmit="return createNewTransaction();" class="transaction-form">
+            <label for="name-input">Transaction Name: <input type="text" id="name-input"/></label>
+            <label for="description-input">Transaction Description (optional): <input type="text" id="description-input"/></label>
+            <label for="amount-input">Transaction Amount: <input type="number" step="0.01" id="amount-input"/></label>
+            <button type="submit" class="form-button">Submit</button>
+          </form>
+        </div>
+        <div id="update-form" class="transaction-form-area">
+
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <!--Complete this-->
+    </footer>
+    <script>window.onload = loadAllTransactions;</script>
+  </body>
+</html>

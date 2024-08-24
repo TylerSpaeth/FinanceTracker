@@ -1,0 +1,130 @@
+html {
+  background-color: #EADBC8;
+  color: #0F2C59;
+}
+
+#homepage {
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background-color: #DAC0A3;
+  border: 1px solid #F8F0E5;
+}
+
+input {
+  background-color: #F8F0E5;
+  border: none;
+}
+
+header {
+  background-color: #DAC0A3;
+  overflow: hidden;
+  text-align: center;
+  font-size: 22px;
+  border-bottom: 1px solid #0F2C59;
+}
+
+.login-register-area, .transaction-form-area {
+  background-color: #DAC0A3;
+  max-width: fit-content;
+  margin: 50px auto;
+  border: 1px solid #0F2C59;
+  border-radius: 10px;
+}
+
+.login-register-form, .transaction-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 30px;
+  gap: 12px;
+}
+
+.login-register-label, .new-transaction-label, .update-transaction-label {
+  text-align: center;
+  font-size: 30px;
+  margin: 50px auto 0;
+}
+
+.form-button {
+  background-color: #F8F0E5;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  margin-bottom: 2;
+}
+
+a:link {
+  color:#0F2C59;
+}
+
+a:visited {
+  color: #0F2C59;
+}
+
+a:hover {
+  color: #F8F0E5;
+}
+
+a:active {
+  color: #F8F0E5;
+}
+
+#transaction-page-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 25px;
+  gap: 40px;
+}
+
+#transactions {
+  max-width: 70%;
+  min-width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+#transactions>* {
+  border-bottom: 1px solid #0F2C59;
+  border-right: 1px solid #0F2C59;
+  border-left: 1px solid #0F2C59;
+}
+
+#transactions:first-child {
+  border-top: 1px solid #0F2C59;;
+}
+
+#transactions-total {
+  text-align: center;
+  margin: 25px auto;
+  background-color: #F8F0E5;
+  width: fit-content;
+  overflow: hidden;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.transaction-form-area {
+  margin-top: 0;
+}
+
+#right-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/** If a user inputs an invalid input value put a red border around the input**/
+input:user-invalid {
+  border: 1px solid red;
+}
+
+
+
