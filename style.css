@@ -126,5 +126,10 @@ input:user-invalid {
   border: 1px solid red;
 }
 
+/** A label informing the user that something is wrong **/
+.warning-label {
+  color: red;
+}
+
 
 

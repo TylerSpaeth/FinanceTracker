@@ -29,7 +29,8 @@ function login() {
 
   var email = document.getElementById("email-input").value;
   var password = document.getElementById("password-input").value;
-
+  var loginForm = document.getElementById("login-form");
+  
   fetch("https://localhost:7137/login", {
     method: "POST",
     headers: {
@@ -41,14 +42,17 @@ function login() {
       "password": password
     })
   })
-  // TODO clean up the returns
+  // Check the response status, if ok then get the json, otherwise throw an error
   .then(response => {
     // If the login was successful
     if(response.ok) {
       return response.json();
     }
-    return false;
+    else {
+      throw new Error(response.status);
+    }
    })
+   // Send the user to the home page with their bearer token stored in session storage
    .then(jsonResponse => {
     // Parse the bearer token from the response
     var accessToken = JSON.parse(JSON.stringify(jsonResponse)).accessToken;
@@ -58,7 +62,13 @@ function login() {
     window.location.href = "home.html";
     // If the all happened successfully, then return true so the form is submitted
     return true;
-   })
+  })
+  // If an error occurs along the way, inform the user that the username or password must be incorrect
+  .catch(() => {
+    loginForm.innerHTML += "<label class=\"warning-label\">Username and/or password are incorrect. Try Again.</label>";
+  })
+  // If true is not returned somewhere above, then false should be returned so the form is not 
+  // submitted
   return false;
 }
 
