@@ -25,7 +25,34 @@ function loadAllTransactions() {
     var netGainLoss = 0;
 
     for(let i = 0; i < jsonResponse.length; i++) {
+
       var transaction = jsonResponse[i];
+
+      var transactionName = JSON.parse(JSON.stringify(transaction)).transactionName;
+      var transactionDescription = JSON.parse(JSON.stringify(transaction)).transactionDescription;
+
+      // Determine the transaction amount, format the string properly, and determine if the class
+      // should be positive or negative
+      var transactionAmount = JSON.parse(JSON.stringify(transaction)).transactionAmount;
+      var positiveNegativeString;
+      if(transactionAmount < 0) {
+        transactionAmount = "-$" + (-transactionAmount).toFixed(2);
+        positiveNegativeString = "negative"
+      }
+      else {
+        transactionAmount = "$" + transactionAmount.toFixed(2);
+        positiveNegativeString = "positive"
+      }
+
+      // Parse the individual components out of the transactionDate and then reformat in
+      // a way that is easier to read
+      var rawTransactionDate = JSON.parse(JSON.stringify(transaction)).transactionDate;
+      var year = rawTransactionDate.slice(0,4);
+      var month = rawTransactionDate.slice(5,7);
+      var day = rawTransactionDate.slice(8,10);
+      var hour = rawTransactionDate.slice(11,13);
+      var minute = rawTransactionDate.slice(14,16);
+      var transactionDate = hour + ":" + minute + " " + month + "/" + day + "/" + year;
       
       /* 
       For each transaction recieved from the api:
@@ -34,10 +61,19 @@ function loadAllTransactions() {
         - Create a button that when pressed deletes the transaction
       */
       document.getElementById("transactions").innerHTML += 
-      "<div id=\""+transaction.transactionID+"\">"
-        +"<label class=\"transaction\">"+ JSON.stringify(transaction) +"</label>"
-        +"<button type=\"button\" id=\"delete-button\" onclick=\"deleteTransaction(this);\">Delete</button>"
-        +"<button type=\"button\" id=\"update-button\" onclick=\"updateTransactionForm(this);\">Update</button>"
+      "<div id=\""+transaction.transactionID+"\" class=\"transaction\">"
+        +"<div id=\"text-portion\">"
+          +"<div>"
+            +"<label id=\"transaction-name\" class=\"transaction-piece\">"+ transactionName +" - </label>"
+            +"<label class=\"transaction-piece "+ positiveNegativeString +"\">"+ transactionAmount +"</label>"
+          +"</div>"
+          +"<label id=\"description-label\" class=\"transaction-piece\">"+ transactionDescription +"</label>"
+          +"<label class=\"transaction-piece\">"+ transactionDate +"</label>"
+        +"</div>"
+        +"<div id=\"button-portion\">"
+          +"<button type=\"button\" id=\"delete-button\" onclick=\"deleteTransaction(this);\">Delete</button>"
+          +"<button type=\"button\" id=\"update-button\" onclick=\"updateTransactionForm(this);\">Update</button>"
+        +"</div>"
       +"</div>";
       netGainLoss += transaction.transactionAmount;
     }
@@ -45,10 +81,12 @@ function loadAllTransactions() {
     // Summarize the net gains or loss from the transactions
     // .toFixed is used to ensure that the number has only 2 decimal places
     if(netGainLoss < 0) {
-      document.getElementById("transactions-total").innerHTML += "<h2>Net: -$" + -netGainLoss.toFixed(2) + "</h2>" ;
+      document.getElementById("transactions-total").innerHTML += 
+        "<h2 class=\"negative\">Net: -$" + -netGainLoss.toFixed(2) + "</h2>" ;
     }
     else {
-      document.getElementById("transactions-total").innerHTML += "<h2>Net: $" + netGainLoss.toFixed(2) + "</h2>" ;
+      document.getElementById("transactions-total").innerHTML += 
+        "<h2 class=\"positive\">Net: $" + netGainLoss.toFixed(2) + "</h2>" ;
     }
     
   })
@@ -95,7 +133,7 @@ function createNewTransaction() {
 function deleteTransaction(button) {
 
   var token = sessionStorage.getItem("token");
-  var transactionID = button.parentElement.id;
+  var transactionID = button.parentElement.parentElement.id;
 
   fetch("https://localhost:7137/transaction/"+transactionID, {
     method: "DELETE",
@@ -119,7 +157,7 @@ function updateTransactionForm(button) {
 
   var area = document.getElementById("update-form");
 
-  var transactionID = button.parentElement.id;
+  var transactionID = button.parentElement.parentElement.id;
   // Store this transactionid in session storage so that it can be updated
   sessionStorage.setItem("workingTransactionID", transactionID);
 

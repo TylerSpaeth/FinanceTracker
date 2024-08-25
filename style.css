@@ -1,10 +1,8 @@
+/** HTML Tag Styles **/
+
 html {
   background-color: #EADBC8;
   color: #0F2C59;
-}
-
-#homepage {
-  overflow-y: scroll;
 }
 
 body {
@@ -22,6 +20,11 @@ input {
   border: none;
 }
 
+/** If a user inputs an invalid input value put a red border around the input**/
+input:user-invalid {
+  border: 1px solid red;
+}
+
 header {
   background-color: #DAC0A3;
   overflow: hidden;
@@ -29,6 +32,27 @@ header {
   font-size: 22px;
   border-bottom: 1px solid #0F2C59;
 }
+
+
+a:link {
+  color:#0F2C59;
+}
+
+a:visited {
+  color: #0F2C59;
+}
+
+a:hover {
+  color: #F8F0E5;
+}
+
+a:active {
+  color: #F8F0E5;
+}
+
+/** End of Section **/
+
+/** Sitewide Styles **/
 
 .login-register-area, .transaction-form-area {
   background-color: #DAC0A3;
@@ -60,21 +84,9 @@ header {
   margin-bottom: 2;
 }
 
-a:link {
-  color:#0F2C59;
-}
+/** End of Section **/
 
-a:visited {
-  color: #0F2C59;
-}
-
-a:hover {
-  color: #F8F0E5;
-}
-
-a:active {
-  color: #F8F0E5;
-}
+/** Homepage Styles **/
 
 #transaction-page-content {
   display: flex;
@@ -84,21 +96,26 @@ a:active {
   gap: 40px;
 }
 
-#transactions {
+#left-box {
   max-width: 70%;
   min-width: 70%;
+}
+
+#transactions {
+  background-color: #F8F0E5;
+  max-height: 30vw;
   display: flex;
   flex-direction: column;
+  border: 1px solid #0F2C59;
+  overflow-y: scroll;
 }
 
 #transactions>* {
   border-bottom: 1px solid #0F2C59;
-  border-right: 1px solid #0F2C59;
-  border-left: 1px solid #0F2C59;
 }
 
-#transactions:first-child {
-  border-top: 1px solid #0F2C59;;
+#transactions:last-child {
+  border-bottom: none;
 }
 
 #transactions-total {
@@ -113,17 +130,14 @@ a:active {
 
 .transaction-form-area {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 #right-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-/** If a user inputs an invalid input value put a red border around the input**/
-input:user-invalid {
-  border: 1px solid red;
+  gap: 20px;
 }
 
 /** A label informing the user that something is wrong **/
@@ -131,5 +145,51 @@ input:user-invalid {
   color: red;
 }
 
+.negative {
+  color: red;
+}
 
+.positive {
+  color: green;
+}
 
+.transaction {
+  display: flex;
+  flex-direction: row;
+}
+
+#text-portion {
+  max-width: 90%;
+  min-width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  gap: 5px;
+}
+
+#button-portion {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#update-button, #delete-button, #signout-button {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+#signout-button {
+  background-color:#F8F0E5;
+  margin-bottom: 5px;
+}
+
+#transaction-name {
+  font-weight: bold;
+}
+
+#description-label {
+  font-style: italic;
+}
+
+/** End of Section**/
