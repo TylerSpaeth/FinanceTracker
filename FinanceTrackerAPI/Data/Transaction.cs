@@ -1,5 +1,8 @@
 ﻿namespace FinanceTrackerAPI.Data
 {
+    /// <summary>
+    /// The object that is used to store transaction data.
+    /// </summary>
     public class Transaction
     {
         public String TransactionID { get; set; } = string.Empty;

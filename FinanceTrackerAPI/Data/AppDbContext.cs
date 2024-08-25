@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceTrackerAPI.Data
 {
+    /// <summary>
+    /// This class is used to manage the database connection
+    /// </summary>
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 

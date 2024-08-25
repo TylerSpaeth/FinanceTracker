@@ -3,9 +3,18 @@ using System.Security.Claims;
 
 namespace FinanceTrackerAPI.Endpoints
 {
+    /// <summary>
+    /// This class contains the endpoints for the handling transaction data.
+    /// </summary>
     public static class TransactionEndpoints
     {
 
+        /// <summary>
+        /// This method registers the transaction endpoints under the group "/transaction".
+        /// All of these endpoints require authorization.
+        /// </summary>
+        /// <param name="routes">The <see cref="Microsoft.AspNetCore.Routing.IEndpointRouteBuilder" object 
+        /// for these endpoints to be built on.</param>
         public static void RegisterTransactionEndpoints(this IEndpointRouteBuilder routes)
         {
             var app = routes.MapGroup("/transaction");
@@ -58,6 +67,7 @@ namespace FinanceTrackerAPI.Endpoints
                 return Results.Created($"transaction/{transaction.TransactionID}", transaction);
             }).RequireAuthorization();
 
+            // Updates a transaction
             app.MapPut("/{transactionID}", (AppDbContext context, ClaimsPrincipal principal, String transactionID, Transaction updatedTransaction) =>
             {
                 var userid = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -84,6 +94,7 @@ namespace FinanceTrackerAPI.Endpoints
 
             }).RequireAuthorization();
 
+            // Deletes a transaction
             app.MapDelete("{transactionID}", (AppDbContext context, ClaimsPrincipal principal, String transactionID) =>
             {
                 var userid = principal.FindFirst(ClaimTypes.NameIdentifier).Value;

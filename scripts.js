@@ -1,4 +1,8 @@
-// Registers with the the api
+/**
+ * Attempts to register the user with the api.
+ * 
+ * @returns {boolean} true if the user is successfully registered, false otherwise
+ */
 function register() {
 
   var email = document.getElementById("email-input").value;
@@ -25,6 +29,11 @@ function register() {
 }
 
 // Login via the api
+/**
+ * Attempts to login the user with the api.
+ * 
+ * @returns {boolean} true if the user is able to successfully login, false otherwise
+ */
 function login() {
 
   var email = document.getElementById("email-input").value;

@@ -1,9 +1,16 @@
+/**
+ * Signs the user out and sends them back to the login page
+ */
 function signout() {
   sessionStorage.removeItem("token");
   window.location.href = "index.html";
 }
 
 // Load all transactions specific to this user
+/**
+ * Loads all of the transactions specific the the user into the transaction log.
+ * Also calculates the transaction totals over the past month, year, and all time.
+ */
 function loadAllTransactions() {
 
   var token = sessionStorage.getItem("token");
@@ -22,7 +29,9 @@ function loadAllTransactions() {
   })
   .then(jsonResponse => {
 
-    var netGainLoss = 0;
+    var allTimeNetGainLoss = 0;
+    var yearNetGainLoss = 0;
+    var monthNetGainLoss = 0;
 
     for(let i = 0; i < jsonResponse.length; i++) {
 
@@ -75,25 +84,57 @@ function loadAllTransactions() {
           +"<button type=\"button\" id=\"update-button\" onclick=\"updateTransactionForm(this);\">Update</button>"
         +"</div>"
       +"</div>";
-      netGainLoss += transaction.transactionAmount;
+      allTimeNetGainLoss += transaction.transactionAmount;
+      var currentDate = new Date();
+      var compareDate = new Date(rawTransactionDate);
+      if(currentDate.getTime() - compareDate.getTime() < 31556952000) {
+        yearNetGainLoss += transaction.transactionAmount;
+      }
+      if(currentDate.getTime() - compareDate.getTime() < 2629746000) {
+        monthNetGainLoss += transaction.transactionAmount;
+      }
     }
 
     // Summarize the net gains or loss from the transactions
-    // .toFixed is used to ensure that the number has only 2 decimal places
-    if(netGainLoss < 0) {
-      document.getElementById("transactions-total").innerHTML += 
-        "<h2 class=\"negative\">Net: -$" + -netGainLoss.toFixed(2) + "</h2>" ;
-    }
-    else {
-      document.getElementById("transactions-total").innerHTML += 
-        "<h2 class=\"positive\">Net: $" + netGainLoss.toFixed(2) + "</h2>" ;
-    }
-    
+    document.getElementById("transactions-total").innerHTML += 
+      "<h2 class=\"" +getPositiveNegative(allTimeNetGainLoss)+ "\">All Time Net: " + formatCurrencyString(allTimeNetGainLoss) + "</h2>";
+    document.getElementById("transactions-total").innerHTML += 
+      "<h2 class=\"" +getPositiveNegative(yearNetGainLoss)+ "\">Yearly Net: " + formatCurrencyString(yearNetGainLoss) + "</h2>";
+    document.getElementById("transactions-total").innerHTML += 
+      "<h2 class=\"" +getPositiveNegative(monthNetGainLoss)+ "\">Monthly Net: " + formatCurrencyString(monthNetGainLoss) + "</h2>";
   })
 
 }
 
-// Create a new transaction for this user
+/**
+ * Formats a number into a dollar string representation
+ * @param {number} number a number that should be formatted into a currency. 
+ * @returns {string} a string represenation of the number in dollar format
+ */
+function formatCurrencyString(number) {
+  if(str < 0) {
+    return "-$" + -number.toFixed(2);
+  }
+  return "$" + number.toFixed(2);
+}
+
+/**
+ * Gives a string the corresponds to a css class selector for positive or negative
+ * numbers.
+ * @param {number} number the number that is either positive or negative
+ * @returns {string} a string that is either "positive" or "negative" depending on the
+ * given number. 0 returns positive.
+ */
+function getPositiveNegative(number) {
+  if(number >= 0) return "positive";
+  return "negative";
+}
+
+/**
+ * Attempts to create a new transaction for the user. Utilizing input
+ * fields in the home.html file for that values needed in creation.
+ * @returns {boolean} true if the creation is successful, false otherwise.
+ */
 function createNewTransaction() {
 
   var token = sessionStorage.getItem("token");
@@ -129,7 +170,11 @@ function createNewTransaction() {
   return false;
 }
 
-// Delete a given transaction with its transaction id
+/**
+ * Deletes the transactions the corresponds with the delete button that was pressed.
+ * @param {HTMLButtonElement} button the button that was clicked, which corresponds to
+ * a specific transaction
+ */
 function deleteTransaction(button) {
 
   var token = sessionStorage.getItem("token");
@@ -150,7 +195,12 @@ function deleteTransaction(button) {
   })
 }
 
-// Creates a form to update a transaction
+/**
+ * Creates a new form on the page that allows the user to update the transaction that they selected
+ * the update button for. The form is prefilled with the existing values.
+ * @param {HTMLButtonElement} button the update button that was pressed, corresponding to a specific
+ * transaction.
+ */
 function updateTransactionForm(button) {
 
   var token = sessionStorage.getItem("token");
@@ -186,6 +236,11 @@ function updateTransactionForm(button) {
 }
 
 // Updates a transaction
+/**
+ * Updates the is currently selected as the working transaction according the information
+ * that was input into the update form.
+ * @returns {boolean} true if the update to the transaction was successful, false otherwise
+ */
 function updateTransaction() {
   
   var token = sessionStorage.getItem("token");

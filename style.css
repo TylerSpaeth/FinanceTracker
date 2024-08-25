@@ -119,13 +119,16 @@ a:active {
 }
 
 #transactions-total {
-  text-align: center;
-  margin: 25px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+#transactions-total>* {
   background-color: #F8F0E5;
-  width: fit-content;
-  overflow: hidden;
-  padding: 0 10px;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .transaction-form-area {
