@@ -112,7 +112,7 @@ function loadAllTransactions() {
  * @returns {string} a string represenation of the number in dollar format
  */
 function formatCurrencyString(number) {
-  if(str < 0) {
+  if(number < 0) {
     return "-$" + -number.toFixed(2);
   }
   return "$" + number.toFixed(2);
