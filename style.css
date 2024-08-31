@@ -196,3 +196,17 @@ a:active {
 }
 
 /** End of Section**/
+
+@media only screen and (max-device-width: 800px) {
+  #transaction-page-content {
+    flex-direction: column;
+    align-content: center;
+  }
+  #left-box {
+    max-width: 100%;
+  }
+  #text-portion {
+    max-width: 70%;
+    min-width: 70%;
+  }
+}
