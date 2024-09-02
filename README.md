@@ -24,3 +24,7 @@ There are currently a number of features that could use improvement or implement
 Tyler Spaeth
 <br/>
 tspaeth58@gmail.com
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
