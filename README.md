@@ -5,7 +5,7 @@ than a mobile device. While accessing the website from a mobile device may not l
 all of the features still remain functional. 
 
 ## URL
-A live version of this site is available at [financetracker.software](financetracker.software).
+A live version of this site is available at <a href="https://financetracker.software">financetracker.software</a>.
 
 ## TODO
 There are currently a number of features that could use improvement or implementation. 
